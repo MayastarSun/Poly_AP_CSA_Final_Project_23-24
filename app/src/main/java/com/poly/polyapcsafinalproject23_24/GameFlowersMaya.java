@@ -1,5 +1,10 @@
 package com.poly.polyapcsafinalproject23_24;
 
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.poly.polyapcsafinalproject23_24.GameActivity;
 
 import java.nio.file.Path;
@@ -7,31 +12,50 @@ import java.util.Scanner;
 
 public class GameFlowersMaya extends GameActivity {
 
-    //instance variables
-    //   variables you plan to use throughout the adventure
-    private Scanner scan;
+    private TextView tvTitle, tvSubtitle, tvStoryText;
+    private ImageView ivStory;
+    private Button btn1, btn2, btn3, btn4, btn5;
+
+    private boolean isWon;
+
     private int numLives;
-    //private Player player; (optional)
+
+    @Override
+    protected void run() {
+        setContentView(R.layout.activity_game_5_button);
+
+        tvTitle = findViewById(R.id.tv_title_txt);
+        tvSubtitle = findViewById(R.id.tv_subtitle);
+        tvStoryText = findViewById(R.id.tv_story);
+        ivStory = findViewById(R.id.iv_story);
+        btn1 = findViewById(R.id.btn_1);
+        btn2 = findViewById(R.id.btn_2);
+        btn3 = findViewById(R.id.btn_3);
+        btn4 = findViewById(R.id.btn_4;
+        btn5 findViewById(R.id.btn_5);
 
 
-    public void run()
-    {
-        //initialize number of lives
-        numLives = 4;
-        //create a scanner object for user input
-        scan = new Scanner(System.in);
-
-        //create a player object (optional)
-        //player = new Person(...)
-
-        //display project title and description
-        Util.clearConsole();
-        System.out.println("Hiking Adventure!");
+        tvTitle.setText("Hiking Adventure!");
         System.out.println("It’s hiking day and you are lost in the middle of the woods. What will you do?  You have 4 lives, Good Luck ");
         Util.pauseConsole();
         start();
 
+        numLives = 4;
+        start();
     }
+
+
+    private void setAllBtnsVisible()
+    {
+        btn1.setVisibility(View.VISIBLE);
+        btn2.setVisibility(View.VISIBLE);
+        btn3.setVisibility(View.VISIBLE);
+        btn4.setVisibility(View.VISIBLE);
+        btn5.setVisibility(View.VISIBLE);
+    }
+
+
+}
 
     private void start()
     {
