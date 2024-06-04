@@ -56,13 +56,34 @@ public class GameFlowersMaya extends GameActivity {
 
 
 }
+private void setAllBtnsVisible()
+{
+    btn1.setVisibility(View.VISIBLE);
+    btn2.setVisibility(View.VISIBLE);
+    btn3.setVisibility(View.VISIBLE);
+    btn4.setVisibility(View.VISIBLE);
+    btn5.setVisibility(View.VISIBLE);
+}
 
     private void start()
     {
+        isWon = false;
+
+        ivStory.setImageResource(R.drawable.im_laborday_title);
+        playAudio(R.raw.audio_laborday_bass);
         //start adventure here
-        System.out.println("You are lost. What will you do?");
-        System.out.println("1. Pull out your phone\n2. Keep adventuring hoping to find a way out\n3. Camp For The Night");
-        int Choice = Util.enterInt(1,3);
+
+        String text = "Number of lives:\t" + numLives + "You are lost. What will you do?";
+        System.out.println("1. Pull out your phone \n2. Keep adventuring hoping to find a way out\n3. Camp For The Night");
+
+        ivStoryText.setText(text);
+
+        setAllBtnsVisible();
+        btn1.setText("Pull out your phone");
+        btn2.setText("Keep adventuring hoping to find a way out");
+        btn2.setText("Camp For The Night");
+        btn4.setVisibility(View.INVISIBLE);
+        btn5.setVisibility(View.INVISIBLE);
 
         if (Choice == 1)
         {
