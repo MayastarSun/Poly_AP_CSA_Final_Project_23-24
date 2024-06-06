@@ -36,9 +36,8 @@ public class GameFlowersMaya extends GameActivity {
 
 
         tvTitle.setText("Hiking Adventure!");
-        System.out.println("It’s hiking day and you are lost in the middle of the woods. What will you do?  You have 4 lives, Good Luck ");
-        Util.pauseConsole();
-        start();
+        tvStoryText.setText("It’s hiking day and you are lost in the middle of the woods. What will you do?  You have 4 lives, Good Luck ");
+
 
         numLives = 4;
         start();
@@ -54,16 +53,17 @@ public class GameFlowersMaya extends GameActivity {
         btn5.setVisibility(View.VISIBLE);
     }
 
+    private void setBtnsConinue()
+    {
+        btn1.setVisibility(View.VISIBLE);
+        btn2.setVisibility(View.INVISIBLE);
+        btn3.setVisibility(View.INVISIBLE);
+        btn4.setVisibility(View.INVISIBLE);
+        btn5.setVisibility(View.INVISIBLE);
+        btn1.setText("Coninue");
+    }
 
-}
-private void setAllBtnsVisible()
-{
-    btn1.setVisibility(View.VISIBLE);
-    btn2.setVisibility(View.VISIBLE);
-    btn3.setVisibility(View.VISIBLE);
-    btn4.setVisibility(View.VISIBLE);
-    btn5.setVisibility(View.VISIBLE);
-}
+
 
     private void start()
     {
@@ -74,9 +74,9 @@ private void setAllBtnsVisible()
         //start adventure here
 
         String text = "Number of lives:\t" + numLives + "You are lost. What will you do?";
-        System.out.println("1. Pull out your phone \n2. Keep adventuring hoping to find a way out\n3. Camp For The Night");
 
-        ivStoryText.setText(text);
+
+        tvStoryText.setText(text);
 
         setAllBtnsVisible();
         btn1.setText("Pull out your phone");
@@ -85,58 +85,82 @@ private void setAllBtnsVisible()
         btn4.setVisibility(View.INVISIBLE);
         btn5.setVisibility(View.INVISIBLE);
 
-        if (Choice == 1)
-        {
+        btn1.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
             PullOutPhone();
         }
-
-        if (Choice == 2)
-        {
+    });
+            btn2.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
             KeepAdventuring();
         }
+    });
 
-        if (Choice == 3)
-        {
+            btn3.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
             CampForTheNight();
         }
-    }
+    });
+
+
+        }
 
     private void PullOutPhone()
     {
-        Util.clearConsole();
 
-        System.out.println("You pulled out your phone and realize you can only");
-        System.out.println("1. Call 911\n2. Play video games");
-        int Choice = Util.enterInt(1, 2);
+        ivStory.setImageResource(R.drawable.im_laborday_beach);
 
-        if (Choice == 1)
-        {
-            Call911();
-        }
+        tvStoryText.setText("\"You pulled out your phone and realize you can only");
 
-        if (Choice == 2)
-        {
-            PlayVideoGames();
-        }
+        setAllBtnsVisible();
+        btn1.setText(" Call 911");
+        btn2.setText("Play video games");
+        btn3.setVisibility(View.INVISIBLE);
+        btn4.setVisibility(View.INVISIBLE);
+        btn5.setVisibility(View.INVISIBLE);
+
+
+ btn1.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Call911();
     }
+});
 
+        btn2.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        PlayVideoGames();
+    }
+});
+        }
     private void Call911()
     {
-        Util.clearConsole();
+
 
         double chance = Math.random();
 
-        if (chance > .9)
-        {
-            System.out.println("They thought this call was fake and hung up on you.");
-            Util.pauseConsole();
-            defeat();
-        }
-        else
-        {
-            RescueMission();
+            tvStoryText.setText("They thought this call was fake and hung up on you.");
 
-        }
+            setBtnsConinue();
+
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    defeat();
+                }
+            });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RescueMission();
+
+            }
+        });
 
     }
 
@@ -147,122 +171,177 @@ private void setAllBtnsVisible()
 
         double chance = Math.random();
 
-        if (chance > .5)
-        {
-            System.out.println("They could not find you and stopped saving you. You were trapped in the woods. You Died");
-            Util.pauseConsole();
-            defeat();
-        }
-        else
-        {
-            Util.pauseConsole();
-            FoundCivilization();
-        }
+
+
+            tvStoryText.setText("They could not find you and stopped saving you. You were trapped in the woods. You Died");
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    defeat();
+                }
+            });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FoundCivilization();
+
+            }
+        });
+
+
 
     }
 
     private void PlayVideoGames()
     {
-        Util.clearConsole();
+
 
         double chance = Math.random();
 
-        if (chance > .9)
-        {
-            System.out.println("You can’t play any games, you have no cellular data on your phone. You died by natural causes.");
-            Util.pauseConsole();
-            defeat();
-        }
-        else if (chance > .7)
-        {
-            System.out.println("You play video games but then realize you don't know how to play any games on your phone. You died by natural causes.");
-            Util.pauseConsole();
-            defeat();
-        }
-        else if (chance > .5)
-        {
-            System.out.println("You stay playing games for too long and got eaten by a bear. You died");
-            Util.pauseConsole();
-            defeat();
-        }
-        else
-        {
-            PlayRPG();
-        }
+
+            tvStoryText.setText("You can’t play any games, you have no cellular data on your phone. You died by natural causes.");
+
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                defeat();
+            }
+        });
+
+
+        tvStoryText.setText("You play video games but then realize you don't know how to play any games on your phone. You died by natural causes.");
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                defeat();
+            }
+        });
+
+        tvStoryText.setText("You stay playing games for too long and got eaten by a bear. You died");
+            btn2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    defeat();
+                }
+            });
+
+          btn3.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v){
+            PlayRPG();}
+        });
 
     }
 
     private void PlayRPG()
     {
-        Util.clearConsole();
-        System.out.print("You decided to play a rpg game and it taught you how to make it out of the woods. ");
+
+        tvStoryText.setText("You decided to play a rpg game and it taught you how to make it out of the woods. ");
 
         double chance = Math.random();
 
-        if (chance > .7)
-        {
-            FoundCivilization();
-        }
-        else
-        {
-            System.out.println("It did not help, it made you get even more lost and you got bitten to death by wild bats. You died");
-            Util.pauseConsole();
-            defeat();
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { FoundCivilization();
 
-        }
+            }
+        });
+
+
+
+        tvStoryText.setText("It did not help, it made you get even more lost and you got bitten to death by wild bats. You died");
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                defeat();
+            }
+        });
+
+
 
     }
 
     private void KeepAdventuring()
     {
-        Util.clearConsole();
-        System.out.println("You kept adventuring and came across; a old house, a dark cave, and a path that leads to somewhere. What will you pick?");
-        System.out.println("1. A old house\n2. A dark cave\n3. A path that leads to somewhere.");
-        int Choice = Util.enterInt(1,3);
 
-        if (Choice == 1)
-        {
-            AOldHouse();
-        }
-        if (Choice == 2)
-        {
-            ADarkCave();
-        }
-        if (Choice == 3)
-        {
+        tvStoryText.setText("You kept adventuring and came across; a old house, a dark cave, and a path that leads to somewhere. What will you pick?");
+
+        setAllBtnsVisible();
+        btn1.setText(" A old house");
+        btn2.setText("A dark cave");
+        btn3.setText("A path that leads to somewhere");
+        btn4.setVisibility(View.INVISIBLE);
+        btn5.setVisibility(View.INVISIBLE);
+
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AOldHouse();
+            }
+        });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ADarkCave();
+            }
+        });
+    }
+    btn2.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
             APathThatLeadsToSomewhere();
         }
+    });
+}
 
-    }
+
+
 
     private void AOldHouse()
     {
-        Util.clearConsole();
-        System.out.println("You went inside the old house.");
-        System.out.println("It was very dark inside, and you could not see anything. You deciced to take out your flash light out of your bag. You saw a huge table with a huge feast filled with chicken and ribs. You decided to...");
-        System.out.println("1. Eat everything off the table\n2. Take only a bite\n3. Leave the food alone");
-        int Choice = Util.enterInt(1,3);
 
-        if (Choice == 1)
-        {
+        tvStoryText.setText("You went inside the old house.");
+        tvStoryText.setText("It was very dark inside, and you could not see anything. You deciced to take out your flash light out of your bag. You saw a huge table with a huge feast filled with chicken and ribs. You decided to...");
+
+
+        setAllBtnsVisible();
+        btn1.setText(" Eat everything off the table");
+        btn2.setText("Take only a bite");
+        btn3.setText("Leave the food alone");
+        btn4.setVisibility(View.INVISIBLE);
+        btn5.setVisibility(View.INVISIBLE);
+
+
             double chance = Math.random();
 
-            if (chance > .7)
-            {
-                System.out.println("You ate everyting and felt really happy. You started to make the old house your home");
-                Util.pauseConsole();
+
+                isWon = true;
+        tvStoryText.setText("You ate everyting and felt really happy. You started to make the old house your home");
+        setAllBtnsVisible();
+        btn1.setText("Next");
+        btn2.setVisibility(View.INVISIBLE);
+        btn3.setVisibility(View.INVISIBLE);
+        btn4.setVisibility(View.INVISIBLE);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 YouWon();
             }
-
-            else
-            {
-                System.out.println("You ate everthing and you started to have a irritating stomach ache. It hurted so much to where you passed out. You died.");
-                Util.pauseConsole();
-                defeat();
+        });
             }
-        }
-        if (Choice == 2)
-        {
+
+
+                tvStoryText.setText("You ate everthing and you started to have a irritating stomach ache. It hurted so much to where you passed out. You died.");
+                btn1.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        defeat();
+    }
+});
+
+
             double chance = Math.random();
 
             if (chance > .9)
