@@ -36,7 +36,6 @@ public class GameFlowersMaya extends GameActivity {
         btn5 = findViewById(R.id.btn_5);
 
 
-
         tvTitle.setText("Hiking Adventure!");
         tvStoryText.setText("It’s hiking day and you are lost in the middle of the woods. What will you do?  You have 4 lives, Good Luck ");
 
@@ -46,8 +45,7 @@ public class GameFlowersMaya extends GameActivity {
     }
 
 
-    private void setAllBtnsVisible()
-    {
+    private void setAllBtnsVisible() {
         btn1.setVisibility(View.VISIBLE);
         btn2.setVisibility(View.VISIBLE);
         btn3.setVisibility(View.VISIBLE);
@@ -55,8 +53,7 @@ public class GameFlowersMaya extends GameActivity {
         btn5.setVisibility(View.VISIBLE);
     }
 
-    private void setBtnsConinue()
-    {
+    private void setBtnsConinue() {
         btn1.setVisibility(View.VISIBLE);
         btn2.setVisibility(View.INVISIBLE);
         btn3.setVisibility(View.INVISIBLE);
@@ -66,9 +63,7 @@ public class GameFlowersMaya extends GameActivity {
     }
 
 
-
-    private void start()
-    {
+    private void start() {
         isWon = false;
 
         ivStory.setImageResource(R.drawable.im_laborday_title);
@@ -88,30 +83,29 @@ public class GameFlowersMaya extends GameActivity {
         btn5.setVisibility(View.INVISIBLE);
 
         btn1.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            PullOutPhone();
-        }
-    });
-            btn2.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            KeepAdventuring();
-        }
-    });
+            @Override
+            public void onClick(View v) {
+                PullOutPhone();
+            }
+        });
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                KeepAdventuring();
+            }
+        });
 
-            btn3.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            CampForTheNight();
-        }
-    });
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CampForTheNight();
+            }
+        });
 
 
-        }
+    }
 
-    private void PullOutPhone()
-    {
+    private void PullOutPhone() {
 
         ivStory.setImageResource(R.drawable.im_laborday_beach);
 
@@ -125,40 +119,53 @@ public class GameFlowersMaya extends GameActivity {
         btn5.setVisibility(View.INVISIBLE);
 
 
- btn1.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        Call911();
-    }
-});
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Call911();
+            }
+        });
 
         btn2.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        PlayVideoGames();
+            @Override
+            public void onClick(View v) {
+                PlayVideoGames();
+            }
+        });
     }
-});
-        }
+
     private void Call911() {
 
 
         double chance = Math.random();
 
 
-        if (chance > .9) {
-
+        if (chance < 0.5) {
+            isWon = false;
             tvStoryText.setText("They thought this call was fake and hung up on you.");
-
-            setBtnsConinue();
-
+            ivStory.setImageResource(R.drawable.im_laborday_free_meal);
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
             btn1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     defeat();
                 }
             });
+        } else {
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
 
-            btn2.setOnClickListener(new View.OnClickListener() {
+
+            btn1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     RescueMission();
@@ -170,21 +177,37 @@ public class GameFlowersMaya extends GameActivity {
     }
 
 
-        private void RescueMission ()
-        {
-            double chance = Math.random();
-            tvStoryText.setText("They got your call and sent out a rescue mission");
+    private void RescueMission() {
+
+        tvStoryText.setText("They got your call and sent out a rescue mission");
 
 
+        double chance = Math.random();
+        if (chance < 0.5) {
+            isWon = false;
             tvStoryText.setText("They could not find you and stopped saving you. You were trapped in the woods. You Died");
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
             btn1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     defeat();
                 }
             });
+        } else {
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
 
-            btn2.setOnClickListener(new View.OnClickListener() {
+
+            btn1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     FoundCivilization();
@@ -194,17 +217,22 @@ public class GameFlowersMaya extends GameActivity {
 
 
         }
+    }
 
-        private void PlayVideoGames ()
-        {
-
-
-            double chance = Math.random();
-            if (chance > .5)
+    private void PlayVideoGames() {
 
 
-                tvStoryText.setText("You can’t play any games, you have no cellular data on your phone. You died by natural causes.");
+        double chance = Math.random();
+        if (chance > .5) {
 
+            isWon = false;
+            tvStoryText.setText("You can’t play any games, you have no cellular data on your phone. You died by natural causes.");
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
             btn1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -212,24 +240,46 @@ public class GameFlowersMaya extends GameActivity {
                 }
             });
 
-
+        } else if (chance < .9) {
+            isWon = false;
             tvStoryText.setText("You play video games but then realize you don't know how to play any games on your phone. You died by natural causes.");
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
             btn1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     defeat();
                 }
             });
+        } else if (chance > .5) {
+            isWon = false;
 
             tvStoryText.setText("You stay playing games for too long and got eaten by a bear. You died");
-            btn2.setOnClickListener(new View.OnClickListener() {
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+            btn1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     defeat();
                 }
             });
+        } else {
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
 
-            btn3.setOnClickListener(new View.OnClickListener() {
+            btn1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     PlayRPG();
@@ -238,12 +288,20 @@ public class GameFlowersMaya extends GameActivity {
 
         }
 
-        private void PlayRPG ()
-        {
+    }
 
-            tvStoryText.setText("You decided to play a rpg game and it taught you how to make it out of the woods. ");
+    private void PlayRPG() {
 
-            double chance = Math.random();
+        tvStoryText.setText("You decided to play a rpg game and it taught you how to make it out of the woods. ");
+
+        double chance = Math.random();
+        if (chance < 0.5) {
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
 
             btn1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -252,10 +310,16 @@ public class GameFlowersMaya extends GameActivity {
 
                 }
             });
-
-
+        } else {
+            isWon = false;
             tvStoryText.setText("It did not help, it made you get even more lost and you got bitten to death by wild bats. You died");
-            btn2.setOnClickListener(new View.OnClickListener() {
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+            btn1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     defeat();
@@ -264,58 +328,81 @@ public class GameFlowersMaya extends GameActivity {
 
 
         }
+    }
 
-        private void KeepAdventuring ()
-        {
+    private void KeepAdventuring() {
 
-            tvStoryText.setText("You kept adventuring and came across; a old house, a dark cave, and a path that leads to somewhere. What will you pick?");
+        tvStoryText.setText("You kept adventuring and came across; a old house, a dark cave, and a path that leads to somewhere. What will you pick?");
 
-            setAllBtnsVisible();
-            btn1.setText(" A old house");
-            btn2.setText("A dark cave");
-            btn3.setText("A path that leads to somewhere");
-            btn4.setVisibility(View.INVISIBLE);
-            btn5.setVisibility(View.INVISIBLE);
+        setAllBtnsVisible();
+        btn1.setText(" A old house");
+        btn2.setText("A dark cave");
+        btn3.setText("A path that leads to somewhere");
+        btn4.setVisibility(View.INVISIBLE);
+        btn5.setVisibility(View.INVISIBLE);
 
-            btn1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    AOldHouse();
-                }
-            });
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AOldHouse();
+            }
+        });
 
-            btn2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ADarkCave();
-                }
-            });
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ADarkCave();
+            }
+        });
 
-            btn3.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    APathThatLeadsToSomewhere();
-                }
-            });
-        }
-
-
-        private void AOldHouse ()
-        {
-
-            tvStoryText.setText("You went inside the old house.");
-            tvStoryText.setText("It was very dark inside, and you could not see anything. You deciced to take out your flash light out of your bag. You saw a huge table with a huge feast filled with chicken and ribs. You decided to...");
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                APathThatLeadsToSomewhere();
+            }
+        });
+    }
 
 
-            setAllBtnsVisible();
-            btn1.setText(" Eat everything off the table");
-            btn2.setText("Take only a bite");
-            btn3.setText("Leave the food alone");
-            btn4.setVisibility(View.INVISIBLE);
-            btn5.setVisibility(View.INVISIBLE);
+    private void AOldHouse() {
+
+        tvStoryText.setText("You went inside the old house.");
+        tvStoryText.setText("It was very dark inside, and you could not see anything. You deciced to take out your flash light out of your bag. You saw a huge table with a huge feast filled with chicken and ribs. You decided to...");
 
 
-            double chance = Math.random();
+        setAllBtnsVisible();
+        btn1.setText(" Eat everything off the table");
+        btn2.setText("Take only a bite");
+        btn3.setText("Leave the food alone");
+        btn4.setVisibility(View.INVISIBLE);
+        btn5.setVisibility(View.INVISIBLE);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eatEverything();
+            }
+        });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takeABite();
+            }
+        });
+
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                leaveTheFoodAlone();
+            }
+        });
+    }
+
+    private void eatEverything() {
+
+
+        double chance = Math.random();
+        if (chance > .7) {
 
 
             isWon = true;
@@ -331,10 +418,822 @@ public class GameFlowersMaya extends GameActivity {
                     YouWon();
                 }
             });
+        } else {
+
+            isWon = false;
+            tvStoryText.setText("You ate everthing and you started to have a irritating stomach ache. It hurted so much to where you passed out. You died.");
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    defeat();
+                }
+            });
+        }
+    }
+
+    private void takeABite() {
+
+        double chance = Math.random();
+
+        if (chance > .9) {
+            isWon = true;
+            tvStoryText.setText("You ate one bite and felt really happy. You started to make the old house your home");
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    YouWon();
+                }
+            });
         }
 
 
-        tvStoryText.setText("You ate everthing and you started to have a irritating stomach ache. It hurted so much to where you passed out. You died.");
+        if (chance > .5) {
+            tvStoryText.setText("You took one bite and felt nothing. You didnt know what else to do ever since you took that one bite. It seems nothing in your life matters anymore, you couldn't do anything else and you didnt feel happy anymore. There was nothing to entertain you... 2 months later. No one came for you and you felt really unhappy, lonely, and empty. You died by a rope.");
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    defeat();
+                }
+            });
+        } else {
+            tvStoryText.setText("You took one bite and threw up. You died from a sickness");
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    defeat();
+                }
+            });
+        }
+    }
+
+    private void leaveTheFoodAlone() {
+
+        double chance = Math.random();
+
+        if (chance > .5) {
+            isWon = true;
+            tvStoryText.setText("You ate nothing and felt really happy. You started to make the old house your home");
+
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    YouWon();
+                }
+            });
+
+        }
+
+        if (chance > .7) {
+            isWon = false;
+            tvStoryText.setText("You ate nothing and felt nothing. You didnt know what else to do ever since you didnt eat anything. It seems nothing in your life matters anymore, you couldn't do anything else and you didnt feel happy anymore. There was nothing to entertain you... 2 months later, No one came for you and you felt really unhappy, lonely, and empty. You died unhappy.");
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    defeat();
+
+                }
+            });
+        } else {
+            isWon = false;
+            tvStoryText.setText("You ate nothing and the food started to rot leaving the house sinking. After a hour the smell was getting really toxic to where you started choking. You died from choking to death.");
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    defeat();
+
+                }
+            });
+        }
+    }
+
+
+    private void ADarkCave() {
+
+        tvStoryText.setText("It was very dark inside, and you could not see anything. You deciced to take out your flash light out of your bag; you then saw two tunnels. One of tunnels lead to hungry wild animals and the other was a old mines shaft. What will you chose?");
+        tvStoryText.setText("1. The tunnel with the hungry wild animals\n2. The mines shaft");
+        setAllBtnsVisible();
+        btn1.setText("The tunnel with the hungry wild animals");
+        btn2.setText("The mines shaft");
+        btn3.setVisibility(View.INVISIBLE);
+        btn4.setVisibility(View.INVISIBLE);
+        btn5.setVisibility(View.INVISIBLE);
+
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HungryWildAnimals();
+            }
+        });
+
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Mining();
+            }
+        });
+
+
+    }
+
+    private void HungryWildAnimals() {
+
+        tvStoryText.setText("You went inside the tunnel with the hungry wild animals");
+
+
+        double chance = Math.random();
+
+        if (chance > .9) {
+            isWon = false;
+            tvStoryText.setText("You got eaten");
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    defeat();
+
+                }
+            });
+        }
+        if (chance > .7) {
+            isWon = false;
+            tvStoryText.setText("The hungry animals did not eat you. Instead they just stared at you. I mean you have been stuck in the wood for over 3 years. You havent been showering or eating healthy, you've just been waiting and waiting for someone to come look for you. The hungry animals walked away while you just stand there quietly depressed. You Died tragically");
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    defeat();
+
+                }
+            });
+        }
+
+        if (chance > .5) {
+            tvStoryText.setText("The Hungry animals left you alone in the empty tunnel, but you felt really hungry so you could either...");
+
+            btn1.setText("Kill the hungry animals");
+            btn2.setText("Or leave the hungry animals alone.");
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    killTheAnimals();
+                }
+            });
+            btn2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    leaveTheAnimalsAlone();
+                }
+            });
+        }
+    }
+
+    private void killTheAnimals() {
+        double chance = Math.random();
+
+
+        if (chance > .7) {
+            isWon = false;
+            tvStoryText.setText("You tried to kill the animals but they attacked you. You died. ");
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+
+
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    defeat();
+                }
+            });
+        }
+
+        if (chance > .5) {
+            tvStoryText.setText("You attempt to you kill the animals, but you only manage to kill one which was the Hyena. The rest of the animals didnt do anything. Do you want to kill the rest of the animals?");
+            setAllBtnsVisible();
+            btn1.setText("Yes");
+            btn2.setText("No");
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    yes();
+                }
+            });
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    no();
+                }
+            });
+        }
+    }
+
+    private void yes() {
+        double chance = Math.random();
+
+        if (chance > .9) {
+
+            tvStoryText.setText("The rest of the animals killed you");
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    defeat();
+
+                }
+            });
+        }
+        if (chance > .5) {
+            tvStoryText.setText("You manage to kill the rest of the animals. And it seem like there was a opening outside the tunnel ");
+            tvStoryText.setText("You Choose to...");
+            setAllBtnsVisible();
+            btn1.setText("Stay in the cave");
+            btn2.setText("Or walk outside");
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    stayInTheCave();
+                }
+            });
+            btn2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Outside();
+                }
+            });
+        }
+    }
+
+    private void stayInTheCave() {
+
+
+        tvStoryText.setText("You stay inside the very dark cave. While inside two killer bats came inside the cave and started to bite you very hard. You died from killer bats");
+        setAllBtnsVisible();
+        btn1.setText("Next");
+        btn2.setVisibility(View.INVISIBLE);
+        btn3.setVisibility(View.INVISIBLE);
+        btn4.setVisibility(View.INVISIBLE);
+        btn5.setVisibility(View.INVISIBLE);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                defeat();
+
+            }
+        });
+    }
+
+    private void Outside() {
+
+
+        System.out.println("You walked toward the ouside. Outside the tunnel was a small little city");
+        setAllBtnsVisible();
+        btn1.setText("Next");
+        btn2.setVisibility(View.INVISIBLE);
+        btn3.setVisibility(View.INVISIBLE);
+        btn4.setVisibility(View.INVISIBLE);
+        btn5.setVisibility(View.INVISIBLE);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FoundCivilization();
+
+            }
+        });
+    }
+
+    private void no() {
+
+        double chance = Math.random();
+        if (chance < 0.5) {
+            tvStoryText.setText("You left the rest of the animals alone, but you got really bored. The animals didn't care about you, no one did. You start to realize what the hell are you even doing with youself. A week past by and You got really. You wanted killed the animals for some food but you didn't. Instead you took one of your knifes and cut your leg off, you then ate it. You start to do the same for the rest of your body parts. You then passed and died");
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    defeat();
+                }
+            });
+
+
+        } else {
+            tvStoryText.setText("The animals decided to eat you. You died");
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    defeat();
+
+                }
+            });
+
+        }
+    }
+
+
+    private void leaveTheAnimalsAlone() {
+        double chance = Math.random();
+        if (chance < 0.5) {
+            tvStoryText.setText("You left the the animals alone, but you got really bored. The animals didn't care about you, no one did. You start to realize what the hell are you even doing with youself. A week past by and You got really. You wanted killed the animals for some food but you didn't. Instead you took one of your knifes and cut your leg off, you then ate it. You start to do the same for the rest of your body parts. You then passed and died");
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    defeat();
+                }
+            });
+
+
+        } else {
+            tvStoryText.setText("You left the animals alone. The animals decided to eat you. You died");
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    defeat();
+
+                }
+            });
+
+        }
+
+
+    }
+
+
+    private void Mining() {
+
+        tvStoryText.setText("You went inside the mining shaft");
+        tvStoryText.setText("Inside was pretty empty, there was only a few mine carts that were filled with items. You went to go see what's inside each cart.");
+        tvStoryText.setText("One had stone and iron, other one had gold bricks, and the last one had copper");
+        tvStoryText.setText("Which one will you choose?");
+        setAllBtnsVisible();
+        btn1.setText("The cart with the stone and iron");
+        btn2.setText("The cart with the gold bricks");
+        btn3.setText("The cart with copper");
+        btn4.setVisibility(View.INVISIBLE);
+        btn5.setVisibility(View.INVISIBLE);
+
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StoneIron();
+            }
+        });
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goldBricks();
+            }
+        });
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                copperBricks();
+            }
+        });
+    }
+
+
+        private void StoneIron() {
+
+
+            tvStoryText.setText("You pick the cart with the stone and iron. You didn't know what to do with it. Everything else was pretty boring. You didnt die but you pretty bored and lonely. You have a choice you can exit the mines and go to the other tunnel with the hungry animals or you can stay here and rot.");
+            setAllBtnsVisible();
+            btn1.setText("Go to the tunnel with the hungry animals");
+            btn2.setText("Or stay here");
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+
+
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    tunnelHungryWildAnimals();
+                }
+            });
+            btn2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Stay();
+                }
+            });
+
+        }
+        private void tunnelHungryWildAnimals() {
+            System.out.println("You exit the mines and went into the tunnel with the hungry animals");
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    HungryWildAnimals();
+                }
+            });
+
+
+        }
+            private void Stay() {
+
+
+                tvStoryText.setText("You choosed to stay in the mines. After a week living in the mines shaft, you got really skinny to where you could see your actual bones. You didnt have any food so you just starved. You died from stavation");
+                    setAllBtnsVisible();
+                    btn1.setText("Next");
+                    btn2.setVisibility(View.INVISIBLE);
+                    btn3.setVisibility(View.INVISIBLE);
+                    btn4.setVisibility(View.INVISIBLE);
+                    btn5.setVisibility(View.INVISIBLE);
+                    btn1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            defeat();
+                        }
+                    });
+
+                }
+
+
+
+
+        private void goldBricks() {
+
+
+                tvStoryText.setText("You pick the cart with the gold bricks. You felt rich but you didn't know what to do with the gold bricks. You put 4 gold bricks in your bag. Everything else was pretty boring. You didnt die but you pretty bored and lonely. You have a choice you can exit the mines and go to the other tunnel with the hungry animals or you can stay here and rot.");
+            setAllBtnsVisible();
+            btn1.setText("Go to the tunnel with the hungry animals");
+            btn2.setText("Or stay here");
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+
+
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    tunnelHungryWildAnimals();
+                }
+            });
+            btn2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Stay();
+                }
+            });
+            }
+
+        private void copperBricks()
+        {
+
+
+            tvStoryText.setText("You pick the cart with the copper. You didn't know what to do with it. Everything else was pretty boring. You didnt die but you pretty bored and lonely. You have a choice you can exit the mines and go to the other tunnel with the hungry animals or you can stay here and rot.");
+            setAllBtnsVisible();
+            btn1.setText("Go to the tunnel with the hungry animals");
+            btn2.setText("Or stay here");
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+
+
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    tunnelHungryWildAnimals();
+                }
+            });
+            btn2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Stay();
+                }
+            });
+        }
+
+
+
+    private void APathThatLeadsToSomewhere() {
+
+        tvStoryText.setText("You followed the path");
+        tvStoryText.setText("The path lead up to two different paths. One leading left and the one leading right");
+        tvStoryText.setText("Which one will you pick");
+
+
+        setAllBtnsVisible();
+        btn1.setText("The left path");
+        btn2.setText("The right path");
+        btn3.setVisibility(View.INVISIBLE);
+        btn4.setVisibility(View.INVISIBLE);
+        btn5.setVisibility(View.INVISIBLE);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LeftPath();
+            }
+        });
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RightPath();
+            }
+        });
+    }
+    private void LeftPath()
+    {
+
+        tvStoryText.setText("The left path lead to a cliff. Down the cliff you saw a small little city. You decide to try and get down off the cliff.");
+            double chance = Math.random();
+
+            if (chance > .5)
+            {
+
+                tvStoryText.setText("You did not make it off the cliff sucessfully. You fell down, tripped and filped over a bunch of times. You landed on top of a pointy rock and died.");
+                setAllBtnsVisible();
+                btn1.setText("Next");
+                btn2.setVisibility(View.INVISIBLE);
+                btn3.setVisibility(View.INVISIBLE);
+                btn4.setVisibility(View.INVISIBLE);
+                btn5.setVisibility(View.INVISIBLE);
+
+                btn1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        defeat();
+                    }
+                });
+            }
+
+            if (chance > .7)
+            {
+
+                System.out.print("You sucessfully made it down the cliff and walked towards the city");
+                setAllBtnsVisible();
+                btn1.setText("Next");
+                btn2.setVisibility(View.INVISIBLE);
+                btn3.setVisibility(View.INVISIBLE);
+                btn4.setVisibility(View.INVISIBLE);
+                btn5.setVisibility(View.INVISIBLE);
+
+                btn1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        continuedWithAdventure();
+                    }
+                });
+            }
+        }
+
+        private void RightPath()
+        {
+
+            tvStoryText.setText("The right path lead to a different old house");
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AOldHouse();
+                }
+            });
+    }
+
+
+    private void CampForTheNight() {
+
+        tvStoryText.setText("You decided to camp for the night.");
+        tvStoryText.setText("You found three places to set up camp");
+        tvStoryText.setText("One place had a lot of trees and rocks. Another place was by a river. The last was a open field, barely any trees or rocks");
+        tvStoryText.setText("You decided...");
+
+
+        setAllBtnsVisible();
+        btn1.setText("The place with a lot of trees and rocks");
+        btn2.setText("The place by a river");
+        btn2.setText("The open field");
+        btn3.setVisibility(View.INVISIBLE);
+        btn4.setVisibility(View.INVISIBLE);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TreesAndRocks();
+            }
+        });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                River();
+            }
+        });
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenField();
+            }
+        });
+    }
+private void TreesAndRocks() {
+
+    tvStoryText.setText("You decided to camp at the place with a lot of trees and rocks.");
+    tvStoryText.setText("You couldn't find a spot to put your tent, so you just tried to make a campfire ");
+
+        double chance = Math.random();
+
+        if (chance > .9) {
+            System.out.println("You wasn't able to build a campfire. Your clothes caught on fire and the fire started to spead through out the whole forest. The fire was starting to burn you and the smoke was hard to breathe in. You died from burning to death");
+
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    defeat();
+                }
+            });
+        }
+        if (chance > .5) {
+            System.out.println("You built the campfire, but you didnt know what else to do. You couldnt build a tent since there was no room and you had no tools so you couldnt chop any of the trees down. After a while the fire started to become bigger. You tried putting the fire out but you couldn't. Your clothes started to catch on fire and the fire started to spead through out the whole forest. The fire was starting to burn you and the smoke was hard to breathe in. You died from burning to death");
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    defeat();
+                }
+            });
+        }
+    }
+
+private void River() {
+
+
+    tvStoryText.setText("You decided to camp the place by a river");
+    tvStoryText.setText("You set up your tent, and made a campfire, and since there was a river you could fish for food. You were feeling really happy. Couple of days later you started to want to just stay here for the rest you life living in the wood. There was everything that you needed and you felt at home. Overtime you eventually started to make a wooden house for yourself to live off of. This was the best decision you ever made :).");
+    setAllBtnsVisible();
+    btn1.setText("Next");
+    btn2.setVisibility(View.INVISIBLE);
+    btn3.setVisibility(View.INVISIBLE);
+    btn4.setVisibility(View.INVISIBLE);
+    btn5.setVisibility(View.INVISIBLE);
+
+    btn1.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            YouWon();
+        }
+    });
+
+
+}
+
+private void OpenField() {
+
+
+    tvStoryText.setText("You decided to set up camp in the open field.");
+    tvStoryText.setText("You setted up your tent, but you really couldn't do anything else. There was no wood to make a campfire and there wasnt any food. A couple of hours had gone by you felt really hungry. You then saw a bald eagle flying around. You decided to...");
+
+    setAllBtnsVisible();
+    btn1.setText("Try to kill the bald eagle");
+    btn2.setText("leave the eagle alone");
+    btn3.setVisibility(View.INVISIBLE);
+    btn4.setVisibility(View.INVISIBLE);
+    btn5.setVisibility(View.INVISIBLE);
+
+    btn1.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            KillEagle();
+        }
+    });
+
+    btn1.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            LeaveEagleAlone();
+        }
+    });
+}
+private void KillEagle()
+{
+
+    double chance = Math.random();
+
+    if (chance > .9) {
+        tvStoryText.setText("You tried to kill the bald eagle, but the eagle faught back and kept biting you really hard. You died from a bald eagle.");
+        setAllBtnsVisible();
+        btn1.setText("Next");
+        btn2.setVisibility(View.INVISIBLE);
+        btn3.setVisibility(View.INVISIBLE);
+        btn4.setVisibility(View.INVISIBLE);
+        btn5.setVisibility(View.INVISIBLE);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -342,496 +1241,324 @@ public class GameFlowersMaya extends GameActivity {
                 defeat();
             }
         });
+
     }
 
+    if (chance > .5) {
+        tvStoryText.setText("You managed to kill the bald eagle and you ate it. Ten minutes later you started to feel really sick. You threw up and passed out. You then died. You died of food poisoning.");
+        setAllBtnsVisible();
+        btn1.setText("Next");
+        btn2.setVisibility(View.INVISIBLE);
+        btn3.setVisibility(View.INVISIBLE);
+        btn4.setVisibility(View.INVISIBLE);
+        btn5.setVisibility(View.INVISIBLE);
 
-
-            double chance = Math.random();
-
-            (chance > .9)
-            {
-                 tvStoryText.setText("You ate one bite and felt really happy. You started to make the old house your home);
-                                     btn1.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick (View v){
-        YouWon();
-    }
-});
-        }
-
-
-            if (chance > .5)
-            {
-        tvStoryText.setText("You took one bite and felt nothing. You didnt know what else to do ever since you took that one bite. It seems nothing in your life matters anymore, you couldn't do anything else and you didnt feel happy anymore. There was nothing to entertain you... 2 months later. No one came for you and you felt really unhappy, lonely, and empty. You died unhappy.");
-
-               btn1.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        defeat();
-    }
-});
-
-            }
-
-            else
-        {
-        tvStoryText.
-
-setText("You took one bite and threw up. You died from a sickness");
-
-             btn1.
-
-setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick (View v){
-        defeat();
-    }
-});
-        }
-
-        if (Choice == 3)
-        {
-            double chance = Math.random();
-
-            if (chance > .5)
-            {
-                defeat();
-                System.out.println("You ate nothing and felt really happy. You started to make the old house your home");
-                Util.pauseConsole();
-                YouWon();
-            }
-
-            if (chance > .7)
-            {
-                System.out.println("You ate nothing and felt nothing. You didnt know what else to do ever since you didnt eat anything. It seems nothing in your life matters anymore, you couldn't do anything else and you didnt feel happy anymore. There was nothing to entertain you... 2 months later, No one came for you and you felt really unhappy, lonely, and empty. You died unhappy.");
-                Util.pauseConsole();
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 defeat();
             }
+        });
 
-            else
-            {
-                System.out.println("You ate nothing and the food started to rot leaving the house sinking. After a hour the smell was getting really toxic to where you started choking. You died from choking to death.");
-                Util.pauseConsole();
-                defeat();
-            }
-        }
-
-
-
-    private void ADarkCave()
-    {
-        Util.clearConsole();
-        System.out.println("It was very dark inside, and you could not see anything. You deciced to take out your flash light out of your bag; you then saw two tunnels. One of tunnels lead to hungry wild animals and the other was a old mines shaft. What will you chose?");
-        System.out.println("1. The tunnel with the hungry wild animals\n2. The mines shaft");
-        int Choice = Util.enterInt(1,2);
-
-        if (Choice == 1)
-        {
-            HungryWildAnimals();
-        }
-        if (Choice == 2)
-        {
-            Mining();
-        }
     }
 
-    private void HungryWildAnimals()
-    {
-        Util.clearConsole();
-        System.out.println("You went inside the tunnel with the hungry wild animals");
-        Util.pauseConsole();
+    if (chance > .7) {
+        tvStoryText.setText("You missed and you then collapsed on to the ground. You died from starvation.");
+        setAllBtnsVisible();
+        btn1.setText("Next");
+        btn2.setVisibility(View.INVISIBLE);
+        btn3.setVisibility(View.INVISIBLE);
+        btn4.setVisibility(View.INVISIBLE);
+        btn5.setVisibility(View.INVISIBLE);
 
-        double chance = Math.random();
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                defeat();
+            }
+        });
 
-        if (chance > .9)
-        {
-            System.out.println("You got eaten");
-            Util.pauseConsole();
+
+    }
+}
+private void LeaveEagleAlone(){
+
+    tvStoryText.setText("You left the bald eagle alone. Ten minutes later, you then collapsed on to the ground. You died from starvation.");
+    setAllBtnsVisible();
+    btn1.setText("Next");
+    btn2.setVisibility(View.INVISIBLE);
+    btn3.setVisibility(View.INVISIBLE);
+    btn4.setVisibility(View.INVISIBLE);
+    btn5.setVisibility(View.INVISIBLE);
+
+    btn1.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
             defeat();
         }
-        if (chance > .7)
-        {
-            System.out.println("The hungry animals did not eat you. Instead they just stared at you. I mean you have been stuck in the wood for over 3 years. You havent been showering or eating healthy, you've just been waiting and waiting for someone to come look for you. The hungry animals walked away while you just stand there quietly depressed. You Died tragically");
-            Util.pauseConsole();
-            defeat();
-        }
+    });
+}
 
-        if (chance > .5)
-        {
-            System.out.println("The Hungry animals left you alone in the empty tunnel, but you felt really hungry so you could either...");
-            System.out.println("1. Kill the hungry animals\n2. Or leave the hungry animals alone.");
-            int Choice = Util.enterInt(1,2);
 
-            if (Choice == 1)
-            {
 
-                if (chance > .7)
-                {
-                    System.out.println("You tried to kill the animals but they attacked you. You died. ");
-                    Util.pauseConsole();
-                    defeat();
-                }
 
-                if (chance > .5)
-                {
-                    System.out.println("You attempt to you kill the animals, but you only manage to kill one which was the Hyena. The rest of the animals didnt do anything. Do you want to kill the rest of the animals?");
-                    System.out.println("1. Yes\n2. No");
-                    int choice = Util.enterInt(1,2);
+    private void FoundCivilization() {
+        tvStoryText.setText("You made it out of the woods and found a city. will you continue on with your adventure?");
 
-                    if (choice == 1)
-                    {
+        setAllBtnsVisible();
+        btn1.setText("Yes");
+        btn2.setText("No");
+        btn2.setVisibility(View.INVISIBLE);
+        btn3.setVisibility(View.INVISIBLE);
+        btn4.setVisibility(View.INVISIBLE);
+        btn5.setVisibility(View.INVISIBLE);
 
-                        if (chance > .9)
-                        {
-                            System.out.println("The rest of the animals killed you");
-                            Util.pauseConsole();
-                            defeat();
-                        }
-                        if (chance > .5)
-                        {
-                            System.out.println("You manage to kill the rest of the animals. And it seem like there was a opening outside the tunnel ");
-                            System.out.println("You Choose to...");
-                            System.out.println("1. Stay in the cave\n2. Or walk toward the outside");
-                            int option = Util.enterInt(1,2);
-
-                            if (option == 1)
-                            {
-                                System.out.println("You stay inside the very dark cave. While inside two killer bats came inside the cave and started to bite you very hard. You died from killer bats");
-                                Util.pauseConsole();
-                                defeat();
-                            }
-
-                            if (option == 2)
-                            {
-                                System.out.println("You walked toward the ouside. Outside the tunnel was a small little city");
-                                Util.pauseConsole();
-                                FoundCivilization();
-                            }
-                        }
-                    }
-                }
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Yes();
             }
-        }
+        });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                No();
+            }
+        });
     }
 
-    private  void Mining()
-    {
-        Util.clearConsole();
-        System.out.println("You went inside the mining shaft");
-        System.out.println("Inside was pretty empty, there was only a few mine carts that were filled with items. You went to go see what's inside each cart.");
-        System.out.println("One had stone and iron, other one had gold bricks, and the last one had copper");
-        System.out.println("Which one will you choose?");
-        System.out.println("1. The cart with the stone and iron\n2. The cart with the gold bricks\n3. The cart with copper");
-        int choice = Util.enterInt(1,3);
+private void Yes() {
 
-        if (choice == 1)
-        {
-            System.out.println("You pick the cart with the stone and iron. You didn't know what to do with it. Everything else was pretty boring. You didnt die but you pretty bored and lonely. You have a choice you can exit the mines and go to the other tunnel with the hungry animals or you can stay here and rot.");
-            System.out.println("1. Go to the tunnel with the hungry animals\n2. Or stay here");
-            int Choice = Util.enterInt(1,2);
+    tvStoryText.setText("You continue on with your adventure");
+    setAllBtnsVisible();
+    btn1.setText("Next");
+    btn2.setVisibility(View.INVISIBLE);
+    btn3.setVisibility(View.INVISIBLE);
+    btn4.setVisibility(View.INVISIBLE);
+    btn5.setVisibility(View.INVISIBLE);
 
-            if (Choice == 1)
-            {
-                System.out.println("You exit the mines and went into the tunnel with the hungry animals");
-                Util.pauseConsole();
-                HungryWildAnimals();
-            }
-
-            if (Choice == 2)
-            {
-                System.out.println("You choosed to stay in the mines. After a week living in the mines shaft, you got really skinny to where you could see your actual bones. You didnt have any food so you just starved. You died from stavation");
-                Util.pauseConsole();
-                defeat();
-            }
-        }
-
-        if (choice == 2)
-        {
-            System.out.println("You pick the cart with the gold bricks. You felt rich but you didn't know what to do with the gold bricks. You put 4 gold bricks in your bag. Everything else was pretty boring. You didnt die but you pretty bored and lonely. You have a choice you can exit the mines and go to the other tunnel with the hungry animals or you can stay here and rot.");
-            System.out.println("1. Go to the tunnel with the hungry animals\n2. Or stay here");
-            int option = Util.enterInt(1,2);
-
-            if (option == 1)
-            {
-                System.out.println("You exit the mines and went into the tunnel with the hungry animals");
-                Util.pauseConsole();
-                HungryWildAnimals();
-            }
-            if (option == 2)
-            {
-                System.out.println("You choosed to stay in the mines. After a week living in the mines shaft, you got really skinny to where you could see your actual bones. You didnt have any food so you just starved. You died from stavation");
-                Util.pauseConsole();
-                defeat();
-            }
-        }
-
-        if (choice == 3)
-        {
-            System.out.println("You pick the cart with the copper. You didn't know what to do with it. Everything else was pretty boring. You didnt die but you pretty bored and lonely. You have a choice you can exit the mines and go to the other tunnel with the hungry animals or you can stay here and rot.");
-            int Option = Util.enterInt(1,2);
-
-            if (Option == 1)
-            {
-                System.out.println("You exit the mines and went into the tunnel with the hungry animals");
-                Util.pauseConsole();
-                HungryWildAnimals();
-            }
-            if (Option == 2)
-            {
-                System.out.println("You choosed to stay in the mines. After a week living in the mines shaft, you got really skinny to where you could see your actual bones. You didnt have any food so you just starved. You died from stavation");
-                Util.pauseConsole();
-                defeat();
-
-            }
-        }
-
-    }
-
-    private void APathThatLeadsToSomewhere()
-    {
-        Util.clearConsole();
-        System.out.println("You followed the path");
-        System.out.println("The path lead up to two different paths. One leading left and the one leading right");
-        System.out.println("Which one will you pick");
-        System.out.println("1. The left path\n2. The right path");
-        int choice = Util.enterInt(1,2);
-
-        if (choice == 1)
-        {
-            System.out.println("The left path lead to a cliff. Down the cliff you saw a small little city. You decide to try and get down off the cliff.");
-            double chance = Math.random();
-
-            if (chance > .5)
-            {
-                Util.pauseConsole();
-                System.out.println("You did not make it off the cliff sucessfully. You fell down, tripped and filped over a bunch of times. You landed on top of a pointy rock and died.");
-                Util.pauseConsole();
-                defeat();
-            }
-
-            if (chance > .7)
-            {
-                Util.pauseConsole();
-                System.out.print("You sucessfully made it down the cliff and walked towards the city");
-                Util.pauseConsole();
-                Util.clearConsole();
-                continuedWithAdventure();
-            }
-        }
-
-        if (choice == 2)
-        {
-            System.out.println("The right path lead to a different old house");
-            Util.pauseConsole();
-            AOldHouse();
-        }
-    }
-
-
-    private void CampForTheNight()
-    {
-        Util.clearConsole();
-        System.out.println("You decided to camp for the night.");
-        System.out.println("You found three places to set up camp");
-        System.out.println("One place had a lot of trees and rocks. Another place was by a river. The last was a open field, barely any trees or rocks");
-        System.out.println("You decided...");
-        System.out.println("1. The place with a lot of trees and rocks\n2. The place by a river\n3. The open field");
-        int option = Util.enterInt(1, 3);
-
-        if (option == 1)
-        {
-            System.out.println("You decided to camp at the place with a lot of trees and rocks.");
-            System.out.println("You couldn't find a spot to put your tent, so you just tried to make a campfire ");
-            Util.pauseConsole();
-            double chance = Math.random();
-
-            if (chance > .9)
-            {
-                System.out.println("You wasn't able to build a campfire. Your clothes caught on fire and the fire started to spead through out the whole forest. The fire was starting to burn you and the smoke was hard to breathe in. You died from burning to death");
-                Util.pauseConsole();
-                defeat();
-            }
-            if (chance > .5)
-            {
-                System.out.println("You built the campfire, but you didnt know what else to do. You couldnt build a tent since there was no room and you had no tools so you couldnt chop any of the trees down. After a while the fire started to become bigger. You tried putting the fire out but you couldn't. Your clothes started to catch on fire and the fire started to spead through out the whole forest. The fire was starting to burn you and the smoke was hard to breathe in. You died from burning to death");
-                Util.pauseConsole();
-                defeat();
-            }
-        }
-
-        if (option == 2)
-        {
-            System.out.println("You decided to camp the place by a river");
-            System.out.println("You set up your tent, and made a campfire, and since there was a river you could fish for food. You were feeling really happy. Couple of days later you started to want to just stay here for the rest you life living in the wood. There was everything that you needed and you felt at home. Overtime you eventually started to make a wooden house for yourself to live off of. This was the best decision you ever made :).");
-            Util.pauseConsole();
-            YouWon();
-
-        }
-
-        if (option == 3)
-        {
-            System.out.println("You decided to set up camp in the open field.");
-            System.out.println("You setted up your tent, but you really couldn't do anything else. There was no wood to make a campfire and there wasnt any food. A couple of hours had gone by you felt really hungry. You then saw a bald eagle flying around. You decided to...");
-            System.out.println("1. Try to kill the bald eagle\n2. leave the eagle alone");
-            int Choice = Util.enterInt(1, 2);
-
-            if (Choice == 1)
-            {
-                double chance = Math.random();
-
-                if (chance > .9)
-                {
-                    System.out.println("You tried to kill the bald eagle, but the eagle faught back and kept biting you really hard. You died from a bald eagle.");
-                    Util.pauseConsole();
-                    defeat();
-                }
-
-                if (chance > .5)
-                {
-                    System.out.println("You managed to kill the bald eagle and you ate it. Ten minutes later you started to feel really sick. You threw up and passed out. You then died. You died of food poisoning.");
-                    Util.pauseConsole();
-                    defeat();
-                }
-
-                if (chance > .7)
-                {
-                    System.out.println("You missed and you then collapsed on to the ground. You died from starvation.");
-                    Util.pauseConsole();
-                    defeat();
-
-                }
-
-                if (Choice == 2)
-                {
-                    System.out.println("You left the bald eagle alone. Ten minutes later, you then collapsed on to the ground. You died from starvation.");
-                }
-            }
-        }
-    }
-
-    private void FoundCivilization()
-    {
-        Util.clearConsole();
-        System.out.println("You made it out of the woods and found a city. will you continue on with your adventure?");
-        System.out.println("1. Yes\n2. No");
-        int Choice = Util.enterInt(1, 2);
-
-        if (Choice == 1)
-        {
-            System.out.println("You continue on with your adventure");
-            Util.pauseConsole();
-            Util.clearConsole();
+    btn1.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
             continuedWithAdventure();
         }
-        if (Choice == 2)
-        {
-            System.out.println("You did not want to go out to the city. You stayed in the woods but didnt know what else to do. You died of boredem");
-            Util.pauseConsole();
+    });
+    }
+
+private void No()
+{
+
+    tvStoryText.setText("You did not want to go out to the city. You stayed in the woods but didnt know what else to do. You died of boredem");
+    setAllBtnsVisible();
+    btn1.setText("Next");
+    btn2.setVisibility(View.INVISIBLE);
+    btn3.setVisibility(View.INVISIBLE);
+    btn4.setVisibility(View.INVISIBLE);
+    btn5.setVisibility(View.INVISIBLE);
+
+    btn1.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
             defeat();
         }
-    }
+    });
+        }
 
-    private void continuedWithAdventure()
-    {
-        System.out.println("You went inside the local city, and you manage to find a few people to talk to:");
-        System.out.println("Addie, Williams, and Jay ");
-        Util.pauseConsole();
-        Util.clearConsole();
-        System.out.println("\nAddie is a very strong person, she loves wrestling, friendly, and very weathly. You do not want to get on her bad side");
-        Util.pauseConsole();
-        Util.clearConsole();
-        System.out.println("\nWilliams is shy person, he is a nerd, and get very envious of other people");
-        Util.pauseConsole();
-        Util.clearConsole();
-        System.out.println("\nJay is a great person but then very mean when once you get to know him");
-        Util.pauseConsole();
-        Util.clearConsole();
-        System.out.println("\nWho do you want to talk to");
+
+    private void continuedWithAdventure() {
+        tvStoryText.setText("You went inside the local city, and you manage to find a few people to talk to:");
+        tvStoryText.setText("Addie, Williams, and Jay ");
+
+        tvStoryText.setText("\nAddie is a very strong person, she loves wrestling, friendly, and very weathly. You do not want to get on her bad side");
+
+        tvStoryText.setText("\nWilliams is shy person, he is a nerd, and get very envious of other people");
+
+        tvStoryText.setText("\nJay is a great person but then very mean when once you get to know him");
+
+        tvStoryText.setText("\nWho do you want to talk to");
         System.out.println("1. Addie\n2. Williams\n3. Jay");
-        int choice = Util.enterInt(1, 3);
 
-        if (choice == 1)
-        {
-            System.out.println("You walked towards Addie and said: hello");
-            Util.pauseConsole();
-            Addie();
+        setAllBtnsVisible();
+        btn1.setText("Addie");
+        btn1.setText("Williams");
+        btn1.setText("Jay");
+        btn4.setVisibility(View.INVISIBLE);
+        btn5.setVisibility(View.INVISIBLE);
 
-        }
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddieTwo();
+            }
+        });
 
-        if (choice == 2)
-        {
-            System.out.println("You walked towards Williams and said: hello");
-            Util.pauseConsole();
-            Williams();
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WilliamsTwo();
+            }
+        });
 
-        }
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                JayTwo();
+            }
+        });
 
-        if (choice == 3)
-        {
-            System.out.println("You walked toward Jay and said: hello");
-            Util.pauseConsole();
-            Jay();
-        }
     }
+    private void AddieTwo()
+    {
+        tvStoryText.setText("You walked towards Addie and said: hello");
+        setAllBtnsVisible();
+        btn1.setText("Next");
+        btn2.setVisibility(View.INVISIBLE);
+        btn3.setVisibility(View.INVISIBLE);
+        btn4.setVisibility(View.INVISIBLE);
+        btn5.setVisibility(View.INVISIBLE);
+
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Addie();
+            }
+        });
+
+
+        }
+        private void WilliamsTwo() {
+
+                System.out.println("You walked towards Williams and said: hello");
+            setAllBtnsVisible();
+            btn1.setText("Next");
+            btn2.setVisibility(View.INVISIBLE);
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Williams();
+                }
+            });
+
+            }
+            private void JayTwo() {
+
+            System.out.println("You walked toward Jay and said: hello");
+                setAllBtnsVisible();
+                btn1.setText("Next");
+                btn2.setVisibility(View.INVISIBLE);
+                btn3.setVisibility(View.INVISIBLE);
+                btn4.setVisibility(View.INVISIBLE);
+                btn5.setVisibility(View.INVISIBLE);
+
+                btn1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Jay();
+                    }
+                });
+        }
+
 
     private void Addie()
     {
-        Util.clearConsole();
-        System.out.println("Addie: Hey, so I heard that you got stuck in the middle of the woods? ");
-        System.out.println("1. Yes\n2. No");
-        int choice = Util.enterInt(1,2);
 
-        if (choice == 1)
-        {
-            System.out.println("+1 Heart");
-            System.out.println("Addie: You did? Wow, how was it like? Were you scared?");
-            System.out.println("1. It was okay, I wasn't really scared\n2. It was really nerve-racking, I felt very alone\n3. No comment");
-            int option = Util.enterInt(1, 3);
+        tvStoryText.setText("Addie: Hey, so I heard that you got stuck in the middle of the woods? ");
+        tvStoryText.setText("1. Yes\n2. No");
+        btn1.setText("Yes");
+        btn1.setText("No");
+        btn3.setVisibility(View.INVISIBLE);
+        btn4.setVisibility(View.INVISIBLE);
+        btn5.setVisibility(View.INVISIBLE);
 
-            if (option == 1)
-            {
-                Util.pauseConsole();
-                Addie2();
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Nice();
             }
+        });
 
-            if (option == 2)
-            {
-                Util.pauseConsole();
-                Addie3();
-            }
-
-            if (option == 3)
-            {
-                Util.pauseConsole();
-                System.out.println("...I see that you don’t want to talk. I’ll just leave you be. Bye..");
-                Util.pauseConsole();
-                Util.clearConsole();
-                System.out.println("...You can only talk to Williams and Jay now.");
-                System.out.println("Who do you want to talk to?");
-                System.out.println("1. Williams\n2. Jay");
-                int Choice = Util.enterInt(1, 2);
-
-                if (Choice == 1)
-                {
-                    System.out.println("You walked towards Williams and said: hello");
-                    Util.pauseConsole();
-                    Williams();
-                }
-
-                if (Choice == 2)
-                {
-                    System.out.println("You walked toward Jay and said: hello");
-                    Util.pauseConsole();
-                    Jay();
-                }
-
-
-            }
-
-
+    btn1.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Bad();
         }
+    });
+}
 
-        if (choice == 2)
+
+        private void Nice() {
+
+            tvStoryText.setText("+1 Heart");
+            tvStoryText.setText("Addie: You did? Wow, how was it like? Were you scared?");
+
+            btn1.setText("It was okay, I wasn't really scared");
+            btn2.setText("It was really nerve-racking, I felt very alone");
+            btn3.setText("Say Nothing");
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+
+            btn1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Addie2();
+                    ;
+                }
+            });
+            btn2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Addie3();
+                    ;
+                }
+            });
+            btn3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Addie4();
+                    ;
+                }
+            });
+        }
+        private void Addie4(){
+
+            tvStoryText.setText("...I see that you don’t want to talk. I’ll just leave you be. Bye..");
+            tvStoryText.setText("...You can only talk to Williams and Jay now.");
+            tvStoryText.setText("Who do you want to talk to?");
+                    System.out.println("1. Williams\n2. Jay");
+            setAllBtnsVisible();
+            btn1.setText("Williams");
+            btn2.setText("Jay");
+            btn3.setVisibility(View.INVISIBLE);
+            btn4.setVisibility(View.INVISIBLE);
+            btn5.setVisibility(View.INVISIBLE);
+
+
+            if (Choice == 1) {
+                        System.out.println("You walked towards Williams and said: hello");
+                        Util.pauseConsole();
+                        Williams();
+                    }
+
+                    if (Choice == 2) {
+                        System.out.println("You walked toward Jay and said: hello");
+                        Util.pauseConsole();
+                        Jay();
+                    }
+
+
+                }
+
+
+
+
+
+
+        private void Bad()
         {
             System.out.println("Addie: No? But I thought heard someone say that- you know what nevermind if your not gonna tell that’s fine. I can talk to someone else. Bye!");
             Util.pauseConsole();
@@ -857,7 +1584,7 @@ setOnClickListener(new View.OnClickListener() {
         }
 
 
-    }
+
 
     private void Addie2()
     {
